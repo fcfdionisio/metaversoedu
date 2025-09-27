@@ -36,42 +36,24 @@ const GameMap = () => {
     }
   ];
 
-  const handleFase1Click = () => {
-    navigate("/simulacao-pratica");
-  };
+  const handlePhaseClick = (phase: typeof phases[0]) => {
+    if (phase.locked) {
+      toast({
+        title: "Fase Bloqueada",
+        description: "Conclua a fase anterior para desbloquear esta etapa",
+        variant: "destructive"
+      });
+      return;
+    }
 
-  const handleFase2Click = () => {
-    toast({
-      title: "Bloqueado",
-      description: "Conclua a Fase 1",
-      variant: "destructive"
-    });
-  };
-
-  const handleFase3Click = () => {
-    toast({
-      title: "Bloqueado", 
-      description: "Conclua a Fase 2",
-      variant: "destructive"
-    });
-  };
-
-  const handleMiniQuizClick = () => {
-    toast({
-      title: "Mini Quiz",
-      description: "Revise o que aprendeu antes de avançar 🚀",
-    });
-  };
-
-  const handleDesafioClick = () => {
-    toast({
-      title: "Desafio Relâmpago",
-      description: "Questão surpresa cronometrada ⚡",
-    });
-  };
-
-  const handleCafeClick = () => {
-    navigate("/evento-especial");
+    if (phase.id === 1) {
+      navigate("/simulacao-pratica");
+    } else {
+      toast({
+        title: "Em Desenvolvimento",
+        description: "Esta fase estará disponível em breve!",
+      });
+    }
   };
 
   return (
@@ -112,78 +94,102 @@ const GameMap = () => {
             </div>
           </div>
 
-          {/* Game Map with positioned buttons */}
-          <div className="relative w-full h-[600px] mx-auto">
-            {/* Background image container */}
-            <div 
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat rounded-lg"
-              style={{ backgroundImage: `url(${gameMapBg})` }}
-            >
-              <div className="absolute inset-0 bg-background/20 rounded-lg"></div>
-            </div>
+          {/* Game Map */}
+          <div className="space-y-8">
+            {phases.map((phase, index) => (
+              <div 
+                key={phase.id} 
+                className={`flex items-center justify-center ${
+                  index % 2 === 0 ? '' : 'flex-row-reverse'
+                }`}
+              >
+                <div className="w-full max-w-md">
+                  <Card 
+                    className={`
+                      p-6 cursor-pointer transition-all duration-300 hover:scale-105 relative overflow-hidden
+                      ${phase.locked 
+                        ? 'opacity-60 bg-muted/50 border-muted' 
+                        : phase.completed
+                          ? 'bg-gradient-to-br from-metaverso-purple/20 to-metaverso-blue/20 border-metaverso-purple shadow-[var(--glow-purple)]'
+                          : 'hover:shadow-[var(--glow-blue)] border-metaverso-blue/50'
+                      }
+                    `}
+                    onClick={() => handlePhaseClick(phase)}
+                  >
+                    {/* Phase Number Badge */}
+                    <div className="absolute top-4 right-4">
+                      <div className={`
+                        w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold
+                        ${phase.locked 
+                          ? 'bg-muted text-muted-foreground'
+                          : 'bg-gradient-to-r from-metaverso-purple to-metaverso-blue text-white'
+                        }
+                      `}>
+                        {phase.locked ? <Lock className="w-4 h-4" /> : phase.id}
+                      </div>
+                    </div>
 
-            {/* Invisible positioned buttons over map circles */}
-            {/* Fase 1 - Top left */}
-            <button
-              onClick={handleFase1Click}
-              className="absolute top-[15%] left-[20%] w-20 h-20 rounded-full bg-transparent hover:bg-white/10 transition-all duration-200 z-10"
-              title="Fase 1"
-            />
+                    <div className="text-center">
+                      <h3 className="text-2xl font-bold text-foreground mb-2">
+                        Fase {phase.id} — {phase.name}
+                      </h3>
+                      <div className="flex items-center justify-center gap-2 mb-3">
+                        <Zap className="w-4 h-4 text-metaverso-blue" />
+                        <span className="text-lg font-semibold text-foreground">
+                          {phase.xp} XP
+                        </span>
+                      </div>
+                      <p className="text-muted-foreground mb-4">
+                        {phase.description}
+                      </p>
 
-            {/* Fase 2 - Top right */}
-            <button
-              onClick={handleFase2Click}
-              className="absolute top-[15%] right-[20%] w-20 h-20 rounded-full bg-transparent hover:bg-white/10 transition-all duration-200 z-10"
-              title="Fase 2"
-            />
+                      {phase.completed && (
+                        <div className="flex justify-center gap-1 mb-4">
+                          {[...Array(3)].map((_, i) => (
+                            <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                          ))}
+                        </div>
+                      )}
 
-            {/* Fase 3 - Center */}
-            <button
-              onClick={handleFase3Click}
-              className="absolute top-[45%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full bg-transparent hover:bg-white/10 transition-all duration-200 z-10"
-              title="Fase 3"
-            />
+                      <Button 
+                        variant={phase.locked ? "secondary" : "hero"}
+                        className="w-full"
+                        disabled={phase.locked}
+                      >
+                        {phase.locked ? (
+                          <>
+                            <Lock className="w-4 h-4 mr-2" />
+                            Bloqueado
+                          </>
+                        ) : phase.id === 1 ? (
+                          <>
+                            <Play className="w-4 h-4 mr-2" />
+                            Entrar na Fase 1
+                          </>
+                        ) : (
+                          <>
+                            <Play className="w-4 h-4 mr-2" />
+                            Iniciar Fase {phase.id}
+                          </>
+                        )}
+                      </Button>
+                    </div>
 
-            {/* Mini Quiz - Bottom left */}
-            <button
-              onClick={handleMiniQuizClick}
-              className="absolute bottom-[25%] left-[15%] w-16 h-16 rounded-full bg-transparent hover:bg-white/10 transition-all duration-200 z-10"
-              title="Mini Quiz"
-            />
-
-            {/* Desafio Relâmpago - Bottom center */}
-            <button
-              onClick={handleDesafioClick}
-              className="absolute bottom-[20%] left-[50%] transform -translate-x-1/2 w-16 h-16 rounded-full bg-transparent hover:bg-white/10 transition-all duration-200 z-10"
-              title="Desafio Relâmpago"
-            />
-
-            {/* Café Filosófico - Bottom right */}
-            <button
-              onClick={handleCafeClick}
-              className="absolute bottom-[25%] right-[15%] w-16 h-16 rounded-full bg-transparent hover:bg-white/10 transition-all duration-200 z-10"
-              title="Café Filosófico"
-            />
-
-            {/* Visual indicators (optional) */}
-            <div className="absolute top-[12%] left-[17%] text-xs text-white bg-black/50 px-2 py-1 rounded opacity-0 hover:opacity-100 transition-opacity pointer-events-none">
-              Fase 1
-            </div>
-            <div className="absolute top-[12%] right-[17%] text-xs text-white bg-black/50 px-2 py-1 rounded opacity-0 hover:opacity-100 transition-opacity pointer-events-none">
-              Fase 2
-            </div>
-            <div className="absolute top-[40%] left-[47%] text-xs text-white bg-black/50 px-2 py-1 rounded opacity-0 hover:opacity-100 transition-opacity pointer-events-none">
-              Fase 3
-            </div>
-            <div className="absolute bottom-[30%] left-[12%] text-xs text-white bg-black/50 px-2 py-1 rounded opacity-0 hover:opacity-100 transition-opacity pointer-events-none">
-              Mini Quiz
-            </div>
-            <div className="absolute bottom-[25%] left-[47%] text-xs text-white bg-black/50 px-2 py-1 rounded opacity-0 hover:opacity-100 transition-opacity pointer-events-none">
-              Desafio Relâmpago
-            </div>
-            <div className="absolute bottom-[30%] right-[12%] text-xs text-white bg-black/50 px-2 py-1 rounded opacity-0 hover:opacity-100 transition-opacity pointer-events-none">
-              Café Filosófico
-            </div>
+                    {/* Locked Overlay */}
+                    {phase.locked && (
+                      <div className="absolute inset-0 bg-muted/20 backdrop-blur-[1px] flex items-center justify-center">
+                        <div className="text-center">
+                          <Lock className="w-12 h-12 text-muted-foreground mx-auto mb-2" />
+                          <p className="text-sm text-muted-foreground font-medium">
+                            Conclua a fase anterior
+                          </p>
+                        </div>
+                      </div>
+                    )}
+                  </Card>
+                </div>
+              </div>
+            ))}
           </div>
 
           {/* Progress Info */}
