@@ -1,13 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Trophy, Play, Lock, Brain, Coffee, Zap, BarChart3, Users } from "lucide-react";
+import { ArrowLeft, Trophy, Play, Lock, Brain, Coffee, Zap, BarChart3, Users, Shield } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
 
 const GameMap = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const [isGuildModalOpen, setIsGuildModalOpen] = useState(false);
 
   // Action handlers for each map element
   const handleFase1Click = () => {
@@ -98,6 +101,78 @@ const GameMap = () => {
                 <BarChart3 className="w-4 h-4 mr-2" />
                 Dashboard
               </Button>
+              
+              <Dialog open={isGuildModalOpen} onOpenChange={setIsGuildModalOpen}>
+                <DialogTrigger asChild>
+                  <Button className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white border border-purple-400/30 backdrop-blur-sm">
+                    <Shield className="w-4 h-4 mr-2" />
+                    Guilda
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-md bg-gradient-to-br from-purple-900/95 via-blue-900/95 to-pink-900/95 border-purple-400/30 backdrop-blur-xl">
+                  <DialogHeader>
+                    <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent text-center">
+                      Minha Guilda
+                    </DialogTitle>
+                    <p className="text-center text-white/70 text-sm mt-2">Membros (mock)</p>
+                  </DialogHeader>
+                  
+                  <div className="space-y-6 py-4">
+                    {/* Members list */}
+                    <div className="space-y-2">
+                      {["Ana G.", "Bruno T.", "Carol S.", "Diego M.", "Erika P."].map((member, index) => (
+                        <div key={index} className="flex items-center gap-3 p-2 bg-white/10 rounded-lg border border-white/20">
+                          <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-400 to-blue-400 flex items-center justify-center text-white font-bold text-sm">
+                            {member.charAt(0)}
+                          </div>
+                          <span className="text-white">{member}</span>
+                        </div>
+                      ))}
+                    </div>
+                    
+                    {/* Guild ranking badge */}
+                    <div className="text-center">
+                      <div className="inline-block bg-gradient-to-r from-yellow-500 to-orange-500 text-black font-bold px-4 py-2 rounded-full border border-yellow-400/50">
+                        Ranking da Guilda: #12
+                      </div>
+                    </div>
+                    
+                    {/* Action buttons */}
+                    <div className="space-y-3">
+                      <Button 
+                        onClick={() => {
+                          setIsGuildModalOpen(false);
+                          navigate("/sala-guilda");
+                        }}
+                        className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white"
+                      >
+                        Reunir guilda em sala de reunião
+                      </Button>
+                      
+                      <Button 
+                        onClick={() => {
+                          setIsGuildModalOpen(false);
+                          navigate("/convite-desafio-usuarios");
+                        }}
+                        className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white"
+                      >
+                        Convidar usuários da guilda para desafio / duelo
+                      </Button>
+                      
+                      <Button 
+                        onClick={() => {
+                          setIsGuildModalOpen(false);
+                          navigate("/convite-desafio-guildas");
+                        }}
+                        className="w-full bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white"
+                      >
+                        Convidar outra guilda para desafio
+                      </Button>
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
+              
               <div className="flex items-center gap-2 text-white bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20">
                 <Trophy className="w-5 h-5 text-yellow-400" />
                 <span className="font-semibold">Nível 1</span>
