@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Trophy, Play, Lock, Brain, Zap, Coffee } from "lucide-react";
+import { ArrowLeft, Trophy, Play, Lock, Brain, Coffee, Zap } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import gameMapBg from "@/assets/mapa_gamificado_eventos.png";
 
 const GameMap = () => {
   const navigate = useNavigate();
@@ -33,182 +33,174 @@ const GameMap = () => {
     navigate("/mini-desafio");
   };
 
-  const handleDesafioRelampago = () => {
-    toast({
-      title: "Desafio Relâmpago",
-      description: "Questão surpresa cronometrada ⚡",
-    });
-  };
-
   const handleCafeFilosofico = () => {
     navigate("/evento-especial");
   };
 
   return (
-    <div 
-      className="min-h-screen bg-cover bg-center bg-no-repeat relative overflow-hidden"
-      style={{ backgroundImage: `url(${gameMapBg})` }}
-    >
-      {/* Futuristic overlay with gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background/40 via-transparent to-background/60 backdrop-blur-[2px]"></div>
-      
-      {/* Starfield effect */}
-      <div className="absolute inset-0 opacity-30">
-        {[...Array(50)].map((_, i) => (
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-pink-900 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0">
+        {/* Floating orbs */}
+        {[...Array(20)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-1 h-1 bg-white rounded-full animate-pulse"
+            className="absolute rounded-full bg-gradient-to-r from-purple-400/20 to-pink-400/20 animate-pulse"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
+              width: `${20 + Math.random() * 40}px`,
+              height: `${20 + Math.random() * 40}px`,
               animationDelay: `${Math.random() * 2}s`,
-              animationDuration: `${2 + Math.random() * 2}s`
+              animationDuration: `${3 + Math.random() * 2}s`
             }}
           />
         ))}
+        
+        {/* Grid pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]" />
       </div>
       
-      <div className="relative z-10 p-4">
-        <div className="w-full max-w-7xl mx-auto">
+      <div className="relative z-10 p-6">
+        <div className="w-full max-w-6xl mx-auto">
           {/* Header */}
           <div className="flex items-center justify-between mb-8">
             <Button 
               variant="ghost" 
               onClick={() => navigate("/")}
-              className="flex items-center gap-2 hover:bg-white/10 backdrop-blur-sm bg-background/20 border border-white/20"
+              className="flex items-center gap-2 hover:bg-white/10 backdrop-blur-sm bg-background/10 border border-white/20 text-white"
             >
               <ArrowLeft className="w-4 h-4" />
               Voltar ao Teste
             </Button>
             
             <div className="text-center">
-              <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-metaverso-purple via-metaverso-blue to-metaverso-pink bg-clip-text text-transparent mb-2 drop-shadow-lg">
-                Metaverso da Educação — Mapa Gamificado
+              <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-400 via-blue-400 to-pink-400 bg-clip-text text-transparent mb-4">
+                Mapa Gamificado
               </h1>
-              <p className="text-lg text-white font-semibold drop-shadow-md backdrop-blur-sm bg-background/20 rounded-full px-4 py-2 inline-block">
-                Progresso: 0/350 XP | Medalhas: 0/3
-              </p>
+              <div className="flex items-center justify-center gap-4 text-white/90 backdrop-blur-sm bg-white/10 rounded-full px-6 py-3 border border-white/20">
+                <span className="font-semibold">Progresso: 0/350 XP</span>
+                <span>|</span>
+                <span className="font-semibold">Medalhas: 0/3</span>
+              </div>
             </div>
             
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2 text-metaverso-purple bg-background/20 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20">
-                <Trophy className="w-5 h-5" />
-                <span className="font-semibold text-white">Nível 1</span>
-              </div>
+            <div className="flex items-center gap-2 text-white bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20">
+              <Trophy className="w-5 h-5 text-yellow-400" />
+              <span className="font-semibold">Nível 1</span>
             </div>
           </div>
 
-          {/* Interactive Map with Invisible Buttons */}
-          <div className="relative w-full h-[600px] max-w-5xl mx-auto">
-            
-            {/* Fase 1 - Yellow circle (bottom left) */}
-            <button
-              onClick={handleFase1Click}
-              className="absolute w-20 h-20 rounded-full bg-yellow-400/10 hover:bg-yellow-400/20 border-2 border-yellow-400/50 backdrop-blur-sm transition-all duration-300 hover:scale-110 flex items-center justify-center group"
-              style={{ left: '10%', bottom: '20%' }}
-            >
-              <Play className="w-8 h-8 text-yellow-400 group-hover:scale-125 transition-transform" />
-              <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 bg-background/90 backdrop-blur-sm px-3 py-1 rounded-lg border border-yellow-400/30 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                <span className="text-sm font-semibold text-yellow-400">Fase 1 — Fundamentos</span>
-              </div>
-            </button>
+          {/* Main phases - horizontal connected cards */}
+          <div className="mb-12">
+            <div className="flex items-center justify-center gap-8 relative">
+              {/* Connecting line */}
+              <div className="absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 via-blue-500 to-pink-500 opacity-50 -translate-y-1/2 z-0" />
+              
+              {/* Phase 1 */}
+              <Card 
+                className="relative z-10 w-80 bg-gradient-to-br from-green-500/20 to-emerald-600/20 border-green-400/30 backdrop-blur-sm cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-green-500/20"
+                onClick={handleFase1Click}
+              >
+                <CardHeader className="text-center">
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 flex items-center justify-center">
+                    <Play className="w-8 h-8 text-white" />
+                  </div>
+                  <CardTitle className="text-xl text-green-400">Fase 1 — Fundamentos</CardTitle>
+                  <CardDescription className="text-green-300/80 font-semibold">50 XP</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-center text-white/80">Comece sua jornada no metaverso da educação</p>
+                </CardContent>
+              </Card>
 
-            {/* Mini Quiz - Purple dot (between Fase 1 and Fase 2) */}
-            <button
+              {/* Phase 2 */}
+              <Card 
+                className="relative z-10 w-80 bg-gradient-to-br from-blue-500/20 to-indigo-600/20 border-blue-400/30 backdrop-blur-sm cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20"
+                onClick={handleFase2Click}
+              >
+                <CardHeader className="text-center">
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-blue-400 to-indigo-500 flex items-center justify-center">
+                    <Lock className="w-8 h-8 text-white" />
+                  </div>
+                  <CardTitle className="text-xl text-blue-400">Fase 2 — Desafios</CardTitle>
+                  <CardDescription className="text-blue-300/80 font-semibold">100 XP</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-center text-white/60">Bloqueado até concluir Fase 1</p>
+                </CardContent>
+              </Card>
+
+              {/* Phase 3 */}
+              <Card 
+                className="relative z-10 w-80 bg-gradient-to-br from-purple-500/20 to-violet-600/20 border-purple-400/30 backdrop-blur-sm cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20"
+                onClick={handleFase3Click}
+              >
+                <CardHeader className="text-center">
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-purple-400 to-violet-500 flex items-center justify-center">
+                    <Lock className="w-8 h-8 text-white" />
+                  </div>
+                  <CardTitle className="text-xl text-purple-400">Fase 3 — Simulação</CardTitle>
+                  <CardDescription className="text-purple-300/80 font-semibold">200 XP</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-center text-white/60">Bloqueado até concluir Fase 2</p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+
+          {/* Extra activities */}
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {/* Mini Quiz */}
+            <Card 
+              className="bg-gradient-to-br from-pink-500/20 to-rose-600/20 border-pink-400/30 backdrop-blur-sm cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20"
               onClick={handleMiniQuizClick}
-              className="absolute w-12 h-12 rounded-full bg-purple-500/10 hover:bg-purple-500/20 border-2 border-purple-500/50 backdrop-blur-sm transition-all duration-300 hover:scale-110 flex items-center justify-center group"
-              style={{ left: '28%', bottom: '35%' }}
             >
-              <Brain className="w-6 h-6 text-purple-500 group-hover:scale-125 transition-transform" />
-              <div className="absolute -bottom-14 left-1/2 transform -translate-x-1/2 bg-background/90 backdrop-blur-sm px-3 py-1 rounded-lg border border-purple-500/30 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                <span className="text-sm font-semibold text-purple-500">Mini Quiz</span>
-              </div>
-            </button>
+              <CardHeader className="text-center">
+                <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-r from-pink-400 to-rose-500 flex items-center justify-center">
+                  <Brain className="w-6 h-6 text-white" />
+                </div>
+                <CardTitle className="text-lg text-pink-400">Mini Quiz de Revisão</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-center text-white/80">Revise o que aprendeu antes de avançar 🚀</p>
+              </CardContent>
+            </Card>
 
-            {/* Fase 2 - Blue circle (center) */}
-            <button
-              onClick={handleFase2Click}
-              className="absolute w-20 h-20 rounded-full bg-blue-400/10 hover:bg-blue-400/20 border-2 border-blue-400/50 backdrop-blur-sm transition-all duration-300 hover:scale-110 flex items-center justify-center group"
-              style={{ left: '45%', bottom: '45%' }}
-            >
-              <Lock className="w-8 h-8 text-blue-400 group-hover:scale-125 transition-transform" />
-              <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 bg-background/90 backdrop-blur-sm px-3 py-1 rounded-lg border border-blue-400/30 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                <span className="text-sm font-semibold text-blue-400">Fase 2 — Desafios</span>
-              </div>
-            </button>
-
-            {/* Desafio Relâmpago - Purple dot (between Fase 2 and Fase 3) */}
-            <button
-              onClick={handleDesafioRelampago}
-              className="absolute w-12 h-12 rounded-full bg-pink-500/10 hover:bg-pink-500/20 border-2 border-pink-500/50 backdrop-blur-sm transition-all duration-300 hover:scale-110 flex items-center justify-center group"
-              style={{ left: '62%', bottom: '50%' }}
-            >
-              <Zap className="w-6 h-6 text-pink-500 group-hover:scale-125 transition-transform" />
-              <div className="absolute -bottom-14 left-1/2 transform -translate-x-1/2 bg-background/90 backdrop-blur-sm px-3 py-1 rounded-lg border border-pink-500/30 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                <span className="text-sm font-semibold text-pink-500">Desafio Relâmpago</span>
-              </div>
-            </button>
-
-            {/* Fase 3 - Red/Orange circle (top right) */}
-            <button
-              onClick={handleFase3Click}
-              className="absolute w-20 h-20 rounded-full bg-red-400/10 hover:bg-red-400/20 border-2 border-red-400/50 backdrop-blur-sm transition-all duration-300 hover:scale-110 flex items-center justify-center group"
-              style={{ right: '15%', top: '25%' }}
-            >
-              <Lock className="w-8 h-8 text-red-400 group-hover:scale-125 transition-transform" />
-              <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 bg-background/90 backdrop-blur-sm px-3 py-1 rounded-lg border border-red-400/30 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                <span className="text-sm font-semibold text-red-400">Fase 3 — Simulação</span>
-              </div>
-            </button>
-
-            {/* Café Filosófico - Orange circle (bottom right) */}
-            <button
+            {/* Café Filosófico */}
+            <Card 
+              className="bg-gradient-to-br from-orange-500/20 to-amber-600/20 border-orange-400/30 backdrop-blur-sm cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/20"
               onClick={handleCafeFilosofico}
-              className="absolute w-20 h-20 rounded-full bg-orange-400/10 hover:bg-orange-400/20 border-2 border-orange-400/50 backdrop-blur-sm transition-all duration-300 hover:scale-110 flex items-center justify-center group"
-              style={{ right: '10%', bottom: '20%' }}
             >
-              <Coffee className="w-8 h-8 text-orange-400 group-hover:scale-125 transition-transform" />
-              <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 bg-background/90 backdrop-blur-sm px-3 py-1 rounded-lg border border-orange-400/30 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                <span className="text-sm font-semibold text-orange-400">Café Filosófico</span>
-              </div>
-            </button>
-
-            {/* Connecting lines visualization (optional decorative elements) */}
-            <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: -1 }}>
-              <defs>
-                <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="rgb(168, 85, 247)" stopOpacity="0.4" />
-                  <stop offset="50%" stopColor="rgb(59, 130, 246)" stopOpacity="0.4" />
-                  <stop offset="100%" stopColor="rgb(236, 72, 153)" stopOpacity="0.4" />
-                </linearGradient>
-              </defs>
-              {/* Path connecting the phases */}
-              <path
-                d="M 15% 80% Q 30% 65% 50% 65% Q 67% 60% 85% 45%"
-                stroke="url(#pathGradient)"
-                strokeWidth="3"
-                fill="none"
-                strokeDasharray="10,5"
-                className="animate-pulse"
-              />
-            </svg>
+              <CardHeader className="text-center">
+                <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-r from-orange-400 to-amber-500 flex items-center justify-center">
+                  <Coffee className="w-6 h-6 text-white" />
+                </div>
+                <CardTitle className="text-lg text-orange-400">☕ Evento Especial</CardTitle>
+                <CardDescription className="text-orange-300/80">Café Filosófico (Gran + Google)</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-center text-white/80">Participe de discussões filosóficas sobre tecnologia</p>
+              </CardContent>
+            </Card>
           </div>
 
-          {/* Progress Info */}
+          {/* Progress Stats */}
           <div className="mt-12 text-center">
-            <div className="inline-block p-6 bg-background/50 backdrop-blur-md rounded-2xl border border-white/20 shadow-lg">
+            <div className="inline-block p-6 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 shadow-xl">
               <div className="flex items-center gap-8">
                 <div className="text-center">
-                  <div className="text-3xl font-bold bg-gradient-to-r from-metaverso-purple to-metaverso-blue bg-clip-text text-transparent">0</div>
-                  <div className="text-sm text-muted-foreground">XP Total</div>
+                  <div className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">0</div>
+                  <div className="text-sm text-white/70">XP Total</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold bg-gradient-to-r from-metaverso-blue to-metaverso-pink bg-clip-text text-transparent">0</div>
-                  <div className="text-sm text-muted-foreground">Medalhas</div>
+                  <div className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-pink-400 bg-clip-text text-transparent">0</div>
+                  <div className="text-sm text-white/70">Medalhas</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold bg-gradient-to-r from-metaverso-pink to-metaverso-purple bg-clip-text text-transparent">1</div>
-                  <div className="text-sm text-muted-foreground">Nível</div>
+                  <div className="text-3xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">1</div>
+                  <div className="text-sm text-white/70">Nível</div>
                 </div>
               </div>
             </div>
