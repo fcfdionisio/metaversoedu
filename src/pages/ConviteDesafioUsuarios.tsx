@@ -12,6 +12,7 @@ const ConviteDesafioUsuarios = () => {
   const [selectedMembers, setSelectedMembers] = useState<string[]>([]);
   const [challengeType, setChallengeType] = useState("");
   const [showAlert, setShowAlert] = useState(false);
+  const [inviteStatus, setInviteStatus] = useState<"pending" | "sent">("pending");
 
   const members = ["Ana G.", "Bruno T.", "Carol S.", "Diego M.", "Erika P."];
   const challengeTypes = [
@@ -30,7 +31,10 @@ const ConviteDesafioUsuarios = () => {
 
   const handleSendInvite = () => {
     if (selectedMembers.length > 0 && challengeType) {
-      setShowAlert(true);
+      setInviteStatus("sent");
+      setTimeout(() => {
+        setShowAlert(true);
+      }, 500); // Small delay to show status change animation
     }
   };
 
@@ -155,6 +159,30 @@ const ConviteDesafioUsuarios = () => {
                   >
                     Cancelar
                   </Button>
+                </div>
+
+                {/* Status section */}
+                <div className="pt-6 border-t border-white/10">
+                  <h3 className="text-white font-semibold mb-3">Status do convite</h3>
+                  <div className="flex justify-center">
+                    <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-500 ${
+                      inviteStatus === "pending" 
+                        ? "bg-gray-600/80 border-gray-500/50 text-white" 
+                        : "bg-green-600/80 border-green-500/50 text-white animate-pulse"
+                    }`}>
+                      {inviteStatus === "pending" ? (
+                        <>
+                          <span className="animate-spin">⏳</span>
+                          Pendente
+                        </>
+                      ) : (
+                        <>
+                          <span className="animate-bounce">✅</span>
+                          Convite enviado (aguardando resposta)
+                        </>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </CardContent>
             </Card>
