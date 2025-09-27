@@ -47,6 +47,12 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        metaverso: {
+          purple: "hsl(var(--metaverso-purple))",
+          blue: "hsl(var(--metaverso-blue))",
+          pink: "hsl(var(--metaverso-pink))",
+          green: "hsl(var(--metaverso-green))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
