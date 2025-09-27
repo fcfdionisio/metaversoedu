@@ -1,10 +1,50 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Building2, Filter, Users } from "lucide-react";
+import { ArrowLeft, Building2, Search } from "lucide-react";
+import { useState } from "react";
 
 const PainelEmpresa = () => {
   const navigate = useNavigate();
+  
+  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
+  const [showResults, setShowResults] = useState(false);
+
+  const filters = [
+    "Soft Skills",
+    "Lógica", 
+    "Comunicação",
+    "Resolução de Problemas",
+    "Atenção aos Detalhes"
+  ];
+
+  const candidates = [
+    {
+      name: "Candidato A",
+      skills: { Lógica: 85, Comunicação: 70, "Resolução de Problemas": 80, "Atenção aos Detalhes": 75, "Soft Skills": 82 }
+    },
+    {
+      name: "Candidato B", 
+      skills: { Lógica: 78, Comunicação: 85, "Resolução de Problemas": 72, "Atenção aos Detalhes": 88, "Soft Skills": 90 }
+    },
+    {
+      name: "Candidato C",
+      skills: { Lógica: 92, Comunicação: 65, "Resolução de Problemas": 85, "Atenção aos Detalhes": 70, "Soft Skills": 75 }
+    }
+  ];
+
+  const handleFilterChange = (filter: string, checked: boolean) => {
+    if (checked) {
+      setSelectedFilters([...selectedFilters, filter]);
+    } else {
+      setSelectedFilters(selectedFilters.filter(f => f !== filter));
+    }
+  };
+
+  const handleFilter = () => {
+    setShowResults(true);
+  };
 
   return (
     <div className="min-h-screen bg-background p-4">
@@ -22,9 +62,9 @@ const PainelEmpresa = () => {
           
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-metaverso-purple via-metaverso-blue to-metaverso-pink bg-clip-text text-transparent">
-              Painel de Filtros para Empresas
+              Painel de Filtros — Empresas
             </h1>
-            <p className="text-muted-foreground mt-2">Encontre candidatos ideais com base em competências</p>
+            <p className="text-muted-foreground mt-2">Busque talentos por habilidades específicas.</p>
           </div>
           
           <div className="flex items-center gap-2 text-metaverso-purple">
@@ -33,104 +73,108 @@ const PainelEmpresa = () => {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="max-w-4xl mx-auto">
           {/* Filters */}
-          <Card className="p-6">
+          <Card className="p-6 mb-8">
             <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
-              <Filter className="w-6 h-6 text-metaverso-blue" />
-              Filtros de Busca
+              <Search className="w-6 h-6 text-metaverso-blue" />
+              Filtros de Habilidades
             </h2>
-            <div className="space-y-6">
-              <div>
-                <label className="text-sm font-medium text-foreground mb-2 block">
-                  Competência Mínima em Lógica
-                </label>
-                <div className="w-full bg-muted rounded-full h-3">
-                  <div className="bg-gradient-to-r from-metaverso-purple to-metaverso-blue h-3 rounded-full w-3/4"></div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+              {filters.map((filter) => (
+                <div key={filter} className="flex items-center space-x-3">
+                  <Checkbox
+                    id={filter}
+                    checked={selectedFilters.includes(filter)}
+                    onCheckedChange={(checked) => handleFilterChange(filter, checked as boolean)}
+                  />
+                  <label
+                    htmlFor={filter}
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
+                  >
+                    {filter}
+                  </label>
                 </div>
-                <span className="text-sm text-muted-foreground">75/100</span>
-              </div>
-              
-              <div>
-                <label className="text-sm font-medium text-foreground mb-2 block">
-                  Resolução de Problemas
-                </label>
-                <div className="w-full bg-muted rounded-full h-3">
-                  <div className="bg-gradient-to-r from-metaverso-blue to-metaverso-green h-3 rounded-full w-2/3"></div>
-                </div>
-                <span className="text-sm text-muted-foreground">65/100</span>
-              </div>
-              
-              <div>
-                <label className="text-sm font-medium text-foreground mb-2 block">
-                  Comunicação
-                </label>
-                <div className="w-full bg-muted rounded-full h-3">
-                  <div className="bg-gradient-to-r from-metaverso-pink to-metaverso-purple h-3 rounded-full w-1/2"></div>
-                </div>
-                <span className="text-sm text-muted-foreground">50/100</span>
-              </div>
+              ))}
             </div>
             
-            <Button className="w-full mt-6" variant="hero">
-              Aplicar Filtros
+            <Button 
+              onClick={handleFilter}
+              variant="hero" 
+              size="lg"
+              className="w-full md:w-auto"
+              disabled={selectedFilters.length === 0}
+            >
+              Filtrar
             </Button>
           </Card>
 
           {/* Results */}
-          <Card className="p-6">
-            <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
-              <Users className="w-6 h-6 text-metaverso-green" />
-              Candidatos Encontrados
-            </h2>
-            
-            <div className="space-y-4">
-              <div className="p-4 bg-muted/30 rounded-lg">
-                <div className="flex justify-between items-start mb-2">
-                  <h3 className="font-semibold text-foreground">Candidato #1234</h3>
-                  <span className="text-sm bg-metaverso-green/20 text-metaverso-green px-2 py-1 rounded">
-                    95% Match
-                  </span>
-                </div>
-                <div className="grid grid-cols-2 gap-2 text-sm">
-                  <span className="text-muted-foreground">Lógica: 85/100</span>
-                  <span className="text-muted-foreground">Problemas: 78/100</span>
-                  <span className="text-muted-foreground">Detalhes: 72/100</span>
-                  <span className="text-muted-foreground">Comunicação: 68/100</span>
-                </div>
-              </div>
+          {showResults && (
+            <Card className="p-6 mb-8">
+              <h2 className="text-2xl font-bold text-foreground mb-6">
+                Candidatos Encontrados
+              </h2>
               
-              <div className="p-4 bg-muted/30 rounded-lg">
-                <div className="flex justify-between items-start mb-2">
-                  <h3 className="font-semibold text-foreground">Candidato #5678</h3>
-                  <span className="text-sm bg-metaverso-blue/20 text-metaverso-blue px-2 py-1 rounded">
-                    87% Match
-                  </span>
-                </div>
-                <div className="grid grid-cols-2 gap-2 text-sm">
-                  <span className="text-muted-foreground">Lógica: 78/100</span>
-                  <span className="text-muted-foreground">Problemas: 82/100</span>
-                  <span className="text-muted-foreground">Detalhes: 65/100</span>
-                  <span className="text-muted-foreground">Comunicação: 75/100</span>
-                </div>
+              <div className="space-y-6">
+                {candidates.map((candidate, index) => (
+                  <div key={index} className="p-4 bg-muted/30 rounded-lg">
+                    <h3 className="font-bold text-lg text-foreground mb-4">{candidate.name}</h3>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      {selectedFilters.length > 0 
+                        ? selectedFilters.map((skill) => (
+                            <div key={skill} className="space-y-2">
+                              <div className="flex justify-between items-center">
+                                <span className="text-sm font-medium text-foreground">{skill}</span>
+                                <span className="text-sm text-muted-foreground">{candidate.skills[skill as keyof typeof candidate.skills]}</span>
+                              </div>
+                              <div className="w-full bg-muted rounded-full h-2">
+                                <div 
+                                  className="bg-gradient-to-r from-metaverso-purple to-metaverso-blue h-2 rounded-full transition-all duration-500"
+                                  style={{ width: `${candidate.skills[skill as keyof typeof candidate.skills]}%` }}
+                                />
+                              </div>
+                            </div>
+                          ))
+                        : Object.entries(candidate.skills).map(([skill, value]) => (
+                            <div key={skill} className="space-y-2">
+                              <div className="flex justify-between items-center">
+                                <span className="text-sm font-medium text-foreground">{skill}</span>
+                                <span className="text-sm text-muted-foreground">{value}</span>
+                              </div>
+                              <div className="w-full bg-muted rounded-full h-2">
+                                <div 
+                                  className="bg-gradient-to-r from-metaverso-purple to-metaverso-blue h-2 rounded-full transition-all duration-500"
+                                  style={{ width: `${value}%` }}
+                                />
+                              </div>
+                            </div>
+                          ))
+                      }
+                    </div>
+                  </div>
+                ))}
               </div>
-              
-              <div className="p-4 bg-muted/30 rounded-lg">
-                <div className="flex justify-between items-start mb-2">
-                  <h3 className="font-semibold text-foreground">Candidato #9012</h3>
-                  <span className="text-sm bg-metaverso-purple/20 text-metaverso-purple px-2 py-1 rounded">
-                    82% Match
-                  </span>
-                </div>
-                <div className="grid grid-cols-2 gap-2 text-sm">
-                  <span className="text-muted-foreground">Lógica: 76/100</span>
-                  <span className="text-muted-foreground">Problemas: 74/100</span>
-                  <span className="text-muted-foreground">Detalhes: 80/100</span>
-                  <span className="text-muted-foreground">Comunicação: 65/100</span>
-                </div>
-              </div>
-            </div>
-          </Card>
+            </Card>
+          )}
+
+          {/* Privacy Text */}
+          <p className="text-sm text-muted-foreground text-center mb-8">
+            Os perfis são anônimos. O aluno decide se quer revelar seus dados.
+          </p>
+
+          {/* Navigation */}
+          <div className="flex justify-center">
+            <Button 
+              variant="outline" 
+              size="lg"
+              onClick={() => navigate("/dashboard")}
+              className="flex items-center gap-2"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Voltar ao Dashboard
+            </Button>
+          </div>
         </div>
       </div>
     </div>
