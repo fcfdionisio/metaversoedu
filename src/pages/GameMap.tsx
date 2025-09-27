@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Trophy, Play, Lock, Brain, Coffee, Zap, BarChart3 } from "lucide-react";
+import { ArrowLeft, Trophy, Play, Lock, Brain, Coffee, Zap, BarChart3, Users } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const GameMap = () => {
@@ -35,6 +36,10 @@ const GameMap = () => {
 
   const handleCafeFilosofico = () => {
     navigate("/evento-especial");
+  };
+
+  const handleRecruitmentClick = () => {
+    navigate("/recrutamento");
   };
 
   return (
@@ -262,6 +267,23 @@ const GameMap = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Recruitment notification alert */}
+      <div className="fixed bottom-6 right-6 z-50 animate-bounce">
+        <Alert className="bg-gradient-to-r from-yellow-500 to-orange-500 border-2 border-yellow-400 text-black shadow-2xl shadow-yellow-400/50 max-w-sm">
+          <Users className="h-5 w-5 text-black" />
+          <AlertDescription className="font-bold text-lg">
+            🎯 Você foi convocado!
+            <Button 
+              onClick={handleRecruitmentClick}
+              size="sm"
+              className="ml-3 bg-black text-yellow-400 hover:bg-gray-800 font-bold px-4 py-1 rounded-full border border-yellow-400/50"
+            >
+              Ver Missão
+            </Button>
+          </AlertDescription>
+        </Alert>
       </div>
     </div>
   );
