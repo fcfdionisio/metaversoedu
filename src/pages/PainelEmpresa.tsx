@@ -198,13 +198,21 @@ const PainelEmpresa = () => {
               
               <div className="space-y-6">
                 {candidates.map((candidate, index) => (
-                  <div key={index} className="p-4 bg-muted/30 rounded-lg">
+                  <div 
+                    key={index} 
+                    className="p-4 bg-muted/30 rounded-lg cursor-pointer hover:bg-muted/50 transition-all duration-200 hover:scale-[1.02]"
+                    onClick={() => navigate(`/detalhes-candidato/${index + 1}`)}
+                  >
                     <div className="flex justify-between items-center mb-4">
                       <h3 className="font-bold text-lg text-foreground">{candidate.name}</h3>
                       {candidate.name === "Candidato A" && (
                         <Dialog>
                           <DialogTrigger asChild>
-                            <Button variant="outline" size="sm">
+                            <Button 
+                              variant="outline" 
+                              size="sm"
+                              onClick={(e) => e.stopPropagation()}
+                            >
                               Ver Detalhes
                             </Button>
                           </DialogTrigger>
