@@ -20,6 +20,8 @@ import Recrutamento from "./pages/Recrutamento";
 import SalaGuilda from "./pages/SalaGuilda";
 import ConviteDesafioUsuarios from "./pages/ConviteDesafioUsuarios";
 import ConviteDesafioGuildas from "./pages/ConviteDesafioGuildas";
+import RespostasGuilda from "./pages/RespostasGuilda";
+import DetalheResposta from "./pages/DetalheResposta";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -47,6 +49,8 @@ const App = () => (
           <Route path="/sala-guilda" element={<SalaGuilda />} />
           <Route path="/convite-desafio-usuarios" element={<ConviteDesafioUsuarios />} />
           <Route path="/convite-desafio-guildas" element={<ConviteDesafioGuildas />} />
+          <Route path="/respostas-guilda" element={<RespostasGuilda />} />
+          <Route path="/detalhe-resposta/:id" element={<DetalheResposta />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

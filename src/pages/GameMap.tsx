@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Trophy, Play, Lock, Brain, Coffee, Zap, BarChart3, Users, Shield } from "lucide-react";
+import { ArrowLeft, Trophy, Play, Lock, Brain, Coffee, Zap, BarChart3, Users, Shield, Mail } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 
@@ -359,6 +359,23 @@ const GameMap = () => {
             </Button>
           </AlertDescription>
         </Alert>
+      </div>
+
+      {/* Guild Responses FAB */}
+      <div className="fixed bottom-6 left-6 z-50">
+        <Button
+          onClick={() => navigate("/respostas-guilda")}
+          className="relative w-16 h-16 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white shadow-2xl shadow-purple-500/50 animate-pulse"
+        >
+          <Mail className="w-6 h-6" />
+          {/* Notification badge */}
+          <div className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 rounded-full border-2 border-white flex items-center justify-center">
+            <span className="text-xs font-bold text-white">1</span>
+          </div>
+        </Button>
+        <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs px-2 py-1 rounded whitespace-nowrap opacity-0 hover:opacity-100 transition-opacity pointer-events-none">
+          📩 Resposta recebida
+        </div>
       </div>
     </div>
   );
