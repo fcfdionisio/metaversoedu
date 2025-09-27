@@ -9,6 +9,7 @@ import GameMap from "./pages/GameMap";
 import SimulacaoPratica from "./pages/SimulacaoPratica";
 import Dashboard from "./pages/Dashboard";
 import PainelEmpresa from "./pages/PainelEmpresa";
+import EventoEspecial from "./pages/EventoEspecial";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/simulacao-pratica" element={<SimulacaoPratica />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/painel-empresa" element={<PainelEmpresa />} />
+          <Route path="/evento-especial" element={<EventoEspecial />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
