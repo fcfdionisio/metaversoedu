@@ -139,9 +139,17 @@ const PainelEmpresa = () => {
             <p className="text-muted-foreground mt-2">Busque talentos por habilidades específicas.</p>
           </div>
           
-          <div className="flex items-center gap-2 text-metaverso-purple">
-            <Building2 className="w-5 h-5" />
-            <span className="font-semibold">Empresa</span>
+          <div className="flex items-center gap-4">
+            <Button 
+              onClick={() => navigate("/novo-evento")}
+              className="bg-primary text-primary-foreground hover:bg-primary/90"
+            >
+              Cadastrar evento
+            </Button>
+            <div className="flex items-center gap-2 text-metaverso-purple">
+              <Building2 className="w-5 h-5" />
+              <span className="font-semibold">Empresa</span>
+            </div>
           </div>
         </div>
 

@@ -10,6 +10,7 @@ import GameMap from "./pages/GameMap";
 import SimulacaoPratica from "./pages/SimulacaoPratica";
 import Dashboard from "./pages/Dashboard";
 import PainelEmpresa from "./pages/PainelEmpresa";
+import NovoEvento from "./pages/NovoEvento";
 import MiniDesafio from "./pages/MiniDesafio";
 import EventoEspecial from "./pages/EventoEspecial";
 import Recrutamento from "./pages/Recrutamento";
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/simulacao-pratica" element={<SimulacaoPratica />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/painel-empresa" element={<PainelEmpresa />} />
+          <Route path="/novo-evento" element={<NovoEvento />} />
           <Route path="/mini-desafio" element={<MiniDesafio />} />
           <Route path="/evento-especial" element={<EventoEspecial />} />
           <Route path="/recrutamento" element={<Recrutamento />} />
