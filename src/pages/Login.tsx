@@ -26,9 +26,9 @@ const Login = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4">
-      <div className="w-full max-w-4xl grid md:grid-cols-2 gap-8">
+      <div className="w-full max-w-5xl flex gap-8 items-center">
         {/* Login do Aluno */}
-        <Card className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 border-purple-300/30 backdrop-blur-sm">
+        <Card className="flex-1 bg-gradient-to-br from-purple-500/20 to-pink-500/20 border-purple-300/30 backdrop-blur-sm shadow-2xl">
           <CardHeader className="text-center">
             <div className="mx-auto w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mb-4">
               <GraduationCap className="w-8 h-8 text-white" />
@@ -70,10 +70,8 @@ const Login = () => {
           </CardContent>
         </Card>
 
-        <Separator orientation="vertical" className="hidden md:block bg-white/20" />
-
         {/* Login da Empresa */}
-        <Card className="bg-gradient-to-br from-blue-500/20 to-green-500/20 border-blue-300/30 backdrop-blur-sm">
+        <Card className="w-80 bg-gradient-to-br from-blue-500/10 to-green-500/10 border-blue-300/20 backdrop-blur-sm opacity-75 hover:opacity-100 transition-opacity">
           <CardHeader className="text-center">
             <div className="mx-auto w-16 h-16 bg-gradient-to-br from-blue-500 to-green-500 rounded-full flex items-center justify-center mb-4">
               <Building2 className="w-8 h-8 text-white" />

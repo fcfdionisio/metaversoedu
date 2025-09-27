@@ -76,8 +76,8 @@ const Dashboard = () => {
           Estes dados são privados. Você escolhe se quer compartilhar com empresas.
         </p>
 
-        {/* Navigation Buttons */}
-        <div className="flex justify-center gap-4">
+        {/* Navigation Button */}
+        <div className="flex justify-center">
           <Button 
             variant="outline" 
             size="lg"
@@ -86,13 +86,6 @@ const Dashboard = () => {
           >
             <ArrowLeft className="w-4 h-4" />
             Voltar ao Mapa
-          </Button>
-          <Button 
-            variant="hero" 
-            size="lg"
-            onClick={() => navigate("/painel-empresa")}
-          >
-            Painel da Empresa
           </Button>
         </div>
       </div>
