@@ -8,6 +8,7 @@ import ProfileTest from "./pages/ProfileTest";
 import GameMap from "./pages/GameMap";
 import SimulacaoPratica from "./pages/SimulacaoPratica";
 import Dashboard from "./pages/Dashboard";
+import PainelEmpresa from "./pages/PainelEmpresa";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/mapa-gamificado" element={<GameMap />} />
           <Route path="/simulacao-pratica" element={<SimulacaoPratica />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/painel-empresa" element={<PainelEmpresa />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
