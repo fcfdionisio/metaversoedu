@@ -13,6 +13,7 @@ import PainelEmpresa from "./pages/PainelEmpresa";
 import NovoEvento from "./pages/NovoEvento";
 import DetalhesCandidato from "./pages/DetalhesCandidato";
 import SelecionarEvento from "./pages/SelecionarEvento";
+import RespostaCandidato from "./pages/RespostaCandidato";
 import MiniDesafio from "./pages/MiniDesafio";
 import EventoEspecial from "./pages/EventoEspecial";
 import Recrutamento from "./pages/Recrutamento";
@@ -36,6 +37,7 @@ const App = () => (
           <Route path="/novo-evento" element={<NovoEvento />} />
           <Route path="/detalhes-candidato/:id" element={<DetalhesCandidato />} />
           <Route path="/selecionar-evento" element={<SelecionarEvento />} />
+          <Route path="/resposta-candidato" element={<RespostaCandidato />} />
           <Route path="/mini-desafio" element={<MiniDesafio />} />
           <Route path="/evento-especial" element={<EventoEspecial />} />
           <Route path="/recrutamento" element={<Recrutamento />} />

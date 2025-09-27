@@ -333,6 +333,15 @@ const PainelEmpresa = () => {
           </div>
         </div>
       </div>
+
+      {/* FAB - Floating Action Button */}
+      <Button
+        onClick={() => navigate("/resposta-candidato")}
+        className="fixed bottom-6 right-6 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-full px-6 py-4 animate-pulse z-50"
+        size="lg"
+      >
+        📨 Resposta recebida
+      </Button>
     </div>
   );
 };
