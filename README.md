@@ -1,73 +1,70 @@
-# Welcome to your Lovable project
+# 🎮 Metaverso da Educação
 
-## Project info
+> Aprender jogando, contratar por competências.  
+> Projeto desenvolvido no Hackathon Cross Guild 2025.
 
-**URL**: https://lovable.dev/projects/41d563be-b4b4-44ab-abcf-4876e3690f77
+---
 
-## How can I edit this code?
+## 🚀 Visão Geral
+O **Metaverso da Educação** transforma o aprendizado em uma experiência gamificada.  
+A plataforma utiliza **IA** para identificar o estilo de aprendizagem de cada aluno (visual, auditivo, prático), personaliza conteúdos e cria um **mapa de fases com XP, simulações práticas e mini-desafios adaptativos**.  
 
-There are several ways of editing your application.
+Ao final, gera **dashboards de competências** que podem ser usados por empresas parceiras para propor desafios reais e identificar talentos de forma anônima e justa.
 
-**Use Lovable**
+---
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/41d563be-b4b4-44ab-abcf-4876e3690f77) and start prompting.
+## 📌 MVP
+O protótipo atual mostra a jornada em 4 telas principais:
+1. **Teste de Perfil** – identifica estilo de aprendizagem (visual, auditivo, prático).  
+2. **Mapa Gamificado** – fases de estudo com XP e progressão.  
+3. **Simulação Prática** – mini-cases e desafios interativos.  
+4. **Dashboard de Competências** – perfil com pontos fortes e conquistas.  
 
-Changes made via Lovable will be committed automatically to this repo.
+---
 
-**Use your preferred IDE**
+## 🌐 Links do Projeto
+- **Aplicativo em produção (Lovable):**  
+  [https://metaversoedu.lovable.app](https://metaversoedu.lovable.app)  
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- **Pitch em vídeo (YouTube):**  
+  [https://youtu.be/2-srep62U-k](https://youtu.be/2-srep62U-k)  
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- **Apresentação em Google Slides:**  
+  [Google Slides](https://docs.google.com/presentation/d/1iw0wt5yWicLwZMwpNP4_rr3ncfScrS1qFR0tqL63pnE/edit?usp=sharing)  
 
-Follow these steps:
+- **Pitch Deck enxuto em PDF:**  
+  [Pitch Deck PDF](../mnt/data/metaverso_educacao_pitchdeck.pdf)  
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- **Resumo Executivo (1 página):**  
+  [Resumo PDF](../mnt/data/personas_adesao_report.pdf)  
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+---
 
-# Step 3: Install the necessary dependencies.
-npm i
+## 💼 Modelo de Negócio
+- **B2C** → Assinatura estilo *Netflix da educação* + trilhas premium.  
+- **B2B** → Licenciamento da plataforma + eventos patrocinados por empresas parceiras.  
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+---
 
-**Edit a file directly in GitHub**
+## 🛣️ Roadmap
+- **Fase 1**: MVP funcional (4 telas).  
+- **Fase 2**: IA adaptativa + mini-desafios.  
+- **Fase 3**: Guildas, networking e eventos interinstitucionais.  
+- **Fase 4**: Expansão global.  
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+---
 
-**Use GitHub Codespaces**
+## 👥 Equipe
+- Antony de Sousa Severo — Integral  
+- Daniel Bevilacqua — Integral  
+- Eduardo Ribeiro Moreira — Integral  
+- Fernando Carrasco Ferreira Dionisio — Integral  
+- Rafael Novais de Miranda — Integral  
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+---
 
-## What technologies are used for this project?
+## 📜 Licença
+Este projeto foi desenvolvido no âmbito do Hackathon Cross Guild 2025.  
+Uso livre para fins acadêmicos e de demonstração.  
 
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/41d563be-b4b4-44ab-abcf-4876e3690f77) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Update README.md
